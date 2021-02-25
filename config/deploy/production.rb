@@ -9,6 +9,9 @@
 
 
 
+# Set the IP of the VPS
+server '143.110.151.66', user: fetch(:user), roles: %w{app db web}
+
 # role-based syntax
 # ==================
 
