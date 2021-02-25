@@ -1,1262 +1,1042 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="h-screen flex overflow-hidden bg-gray-100">
-  <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-  <div class="md:hidden">
-    <div class="fixed inset-0 flex z-40">
-      <!--
-        Off-canvas menu overlay, show/hide based on off-canvas menu state.
+<!--
+  This example requires Tailwind CSS v2.0+
 
-        Entering: "transition-opacity ease-linear duration-300"
-          From: "opacity-0"
-          To: "opacity-100"
-        Leaving: "transition-opacity ease-linear duration-300"
-          From: "opacity-100"
-          To: "opacity-0"
-      -->
-      <div class="fixed inset-0">
-        <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ]
+  }
+  ```
+-->
+<form class="space-y-8 divide-y divide-gray-200">
+  <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <div>
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Profile
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          This information will be displayed publicly so be careful what you share.
+        </p>
       </div>
-      <!--
-        Off-canvas menu, show/hide based on off-canvas menu state.
 
-        Entering: "transition ease-in-out duration-300 transform"
-          From: "-translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transition ease-in-out duration-300 transform"
-          From: "translate-x-0"
-          To: "-translate-x-full"
-      -->
-      <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-        <div class="absolute top-0 right-0 -mr-12 pt-2">
-          <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-            <span class="sr-only">Close sidebar</span>
-            <!-- Heroicon name: outline/x -->
-            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-          <div class="flex-shrink-0 flex items-center px-4">
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow">
+      <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Username
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex rounded-md shadow-sm">
+              <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                workcation.com/
+              </span>
+              <input type="text" name="username" id="username" autocomplete="username" class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+            </div>
           </div>
-          <nav class="mt-5 px-2 space-y-1">
-            <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
-            <a href="#" class="bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500" -->
-              <!-- Heroicon name: outline/home -->
-              <svg class="text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-              Dashboard
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Heroicon name: outline/users -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              Team
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Heroicon name: outline/folder -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-              </svg>
-              Projects
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Heroicon name: outline/calendar -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Calendar
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Heroicon name: outline/inbox -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-              </svg>
-              Documents
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
-              <!-- Heroicon name: outline/chart-bar -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              Reports
-            </a>
-          </nav>
         </div>
-        <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-          <a href="#" class="flex-shrink-0 group block">
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            About
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <textarea id="about" name="about" rows="3" class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"></textarea>
+            <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="photo" class="block text-sm font-medium text-gray-700">
+            Photo
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
             <div class="flex items-center">
-              <div>
-                <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=TGKBMgZSlp&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </div>
-              <div class="ml-3">
-                <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                  Tom Cook
-                </p>
-                <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                  View profile
+              <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </span>
+              <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Change
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="cover_photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Cover photo
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div class="space-y-1 text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="flex text-sm text-gray-600">
+                  <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <span>Upload a file</span>
+                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                  </label>
+                  <p class="pl-1">or drag and drop</p>
+                </div>
+                <p class="text-xs text-gray-500">
+                  PNG, JPG, GIF up to 10MB
                 </p>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
-      <div class="flex-shrink-0 w-14">
-        <!-- Force sidebar to shrink to fit close icon -->
+    </div>
+
+    <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Personal Information
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          Use a permanent address where you can receive mail.
+        </p>
+      </div>
+      <div class="space-y-6 sm:space-y-5">
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="first_name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            First name
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="first_name" id="first_name" autocomplete="given-name" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="last_name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Last name
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="last_name" id="last_name" autocomplete="family-name" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Email address
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input id="email" name="email" type="email" autocomplete="email" class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="country" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Country / Region
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <select id="country" name="country" autocomplete="country" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Mexico</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="street_address" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Street address
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="street_address" id="street_address" autocomplete="street-address" class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="city" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            City
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="city" id="city" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="state" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            State / Province
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="state" id="state" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="zip" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            ZIP / Postal
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <input type="text" name="zip" id="zip" autocomplete="postal-code" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Notifications
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          We'll always let you know about important changes, but you pick what else you want to hear about.
+        </p>
+      </div>
+      <div class="space-y-6 sm:space-y-5 divide-y divide-gray-200">
+        <div class="pt-6 sm:pt-5">
+          <div role="group" aria-labelledby="label-email">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+              <div>
+                <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700" id="label-email">
+                  By Email
+                </div>
+              </div>
+              <div class="mt-4 sm:mt-0 sm:col-span-2">
+                <div class="max-w-lg space-y-4">
+                  <div class="relative flex items-start">
+                    <div class="flex items-center h-5">
+                      <input id="comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    </div>
+                    <div class="ml-3 text-sm">
+                      <label for="comments" class="font-medium text-gray-700">Comments</label>
+                      <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="relative flex items-start">
+                      <div class="flex items-center h-5">
+                        <input id="candidates" name="candidates" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                      </div>
+                      <div class="ml-3 text-sm">
+                        <label for="candidates" class="font-medium text-gray-700">Candidates</label>
+                        <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="relative flex items-start">
+                      <div class="flex items-center h-5">
+                        <input id="offers" name="offers" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                      </div>
+                      <div class="ml-3 text-sm">
+                        <label for="offers" class="font-medium text-gray-700">Offers</label>
+                        <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pt-6 sm:pt-5">
+          <div role="group" aria-labelledby="label-notifications">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+              <div>
+                <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700" id="label-notifications">
+                  Push Notifications
+                </div>
+              </div>
+              <div class="sm:col-span-2">
+                <div class="max-w-lg">
+                  <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
+                  <div class="mt-4 space-y-4">
+                    <div class="flex items-center">
+                      <input id="push_everything" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                      <label for="push_everything" class="ml-3 block text-sm font-medium text-gray-700">
+                        Everything
+                      </label>
+                    </div>
+                    <div class="flex items-center">
+                      <input id="push_email" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                      <label for="push_email" class="ml-3 block text-sm font-medium text-gray-700">
+                        Same as email
+                      </label>
+                    </div>
+                    <div class="flex items-center">
+                      <input id="push_nothing" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                      <label for="push_nothing" class="ml-3 block text-sm font-medium text-gray-700">
+                        No push notifications
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Static sidebar for desktop -->
-  <div class="hidden md:flex md:flex-shrink-0">
-    <div class="flex flex-col w-64">
-      <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
-        <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-          <div class="flex items-center flex-shrink-0 px-4">
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow">
-          </div>
-          <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
-            <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
-            <a href="#" class="bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md hover:text-gray-900 hover:bg-gray-100">
-              <!-- Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500" -->
-              <!-- Heroicon name: outline/home -->
-              <svg class="text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-              Dashboard
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <!-- Heroicon name: outline/users -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              Team
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <!-- Heroicon name: outline/folder -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-              </svg>
-              Projects
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <!-- Heroicon name: outline/calendar -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Calendar
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <!-- Heroicon name: outline/inbox -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-              </svg>
-              Documents
-            </a>
-
-            <a href="#" class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <!-- Heroicon name: outline/chart-bar -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              Reports
-            </a>
-          </nav>
-        </div>
-        <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-          <a href="#" class="flex-shrink-0 w-full group block">
-            <div class="flex items-center">
-              <div>
-                <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=TGKBMgZSlp&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </div>
-              <div class="ml-3">
-                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                  Tom Cook
-                </p>
-                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                  View profile
-                </p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
-      <button class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-        <span class="sr-only">Open sidebar</span>
-        <!-- Heroicon name: outline/menu -->
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+  <div class="pt-5">
+    <div class="flex justify-end">
+      <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Cancel
+      </button>
+      <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Save
       </button>
     </div>
-    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
-      <div class="py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+  </div>
+</form>
+<form action="/restaurants" accept-charset="UTF-8" method="post" _lpchecked="1"><input type="hidden" name="authenticity_token" value="uIzs1bWUdViCMIGmyxF_72nQ6jBb9_Q7JthgijCiAeYrwtRLBxIbHX-ZmV9FF0a1npl25CGLOi65N_o8Comq0w">
+  <div class="shadow sm:rounded-md sm:overflow-hidden">
+    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+      <div class="grid grid-cols-6 gap-6">
+        <div class="col-span-6 sm:col-span-3">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_name">Nombre del Restaurante:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[name]" id="restaurant_name" style="">
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <!--
-            This example requires Tailwind CSS v2.0+
+        <div class="col-span-6 sm:col-span-3">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_phone_number">Teléfono del Restaurante:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[phone_number]" id="restaurant_phone_number">
+        </div>
 
-            This example requires some changes to your config:
+        <div class="col-span-9 sm:col-span-4">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_address">Dirección:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[address]" id="restaurant_address">
+        </div>
+        <div class="col-span-3 sm:col-span-2">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_zip_code">Código Postal:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[zip_code]" id="restaurant_zip_code">
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_city">Ciudad:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[city]" id="restaurant_city">
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_state">Estado:</label>
+          <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="country" name="restaurant[state]" id="restaurant_state"><option value="">Seleccione opción</option>
+            <option value="Aguascalientes">Aguascalientes</option>
+            <option value="Baja California">Baja California</option>
+            <option value="Baja California Sur">Baja California Sur</option>
+            <option value="Campeche">Campeche</option>
+            <option value="Chiapas">Chiapas</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="Ciudad de México">Ciudad de México</option>
+            <option value="Coahuila">Coahuila</option>
+            <option value="Colima">Colima</option>
+            <option value="Durango">Durango</option>
+            <option value="Estado de México">Estado de México</option>
+            <option value="Guanajuato">Guanajuato</option>
+            <option value="Guerrero">Guerrero</option>
+            <option value="Hidalgo">Hidalgo</option>
+            <option value="Jalisco">Jalisco</option>
+            <option value="Michoacán">Michoacán</option>
+            <option value="Morelos">Morelos</option>
+            <option value="Nayarit">Nayarit</option>
+            <option value="Nuevo León">Nuevo León</option>
+            <option value="Oaxaca">Oaxaca</option>
+            <option value="Puebla">Puebla</option>
+            <option value="Querétaro">Querétaro</option>
+            <option value="Quintana Roo">Quintana Roo</option>
+            <option value="San Luis Potosí">San Luis Potosí</option>
+            <option value="Sinaloa">Sinaloa</option>
+            <option value="Sonora">Sonora</option>
+            <option value="Tabasco">Tabasco</option>
+            <option value="Tamaulipas">Tamaulipas</option>
+            <option value="Tlaxcala">Tlaxcala</option>
+            <option value="Veracruz">Veracruz</option>
+            <option value="Yucatán">Yucatán</option>
+            <option value="Zacatecas">Zacatecas</option></select>
+        </div>
+        <div class="col-span-6 sm:col-span-2">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_country">País:</label>
+          <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="country" name="restaurant[country]" id="restaurant_country"><option value="México">Mexico</option></select>
+        </div>
+        <div class="col-span-6 sm:col-span-6">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_contact_email">Email de Contacto:</label>
+          <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[contact_email]" id="restaurant_contact_email">
+        </div>
 
-            ```
-            // tailwind.config.js
-            module.exports = {
-              // ...
-              plugins: [
-                // ...
-                require('@tailwindcss/forms'),
-              ]
-            }
-            ```
-          -->
-          <form class="space-y-8 divide-y divide-gray-200">
-            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-              <div>
-                <div>
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Profile
-                  </h3>
-                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    This information will be displayed publicly so be careful what you share.
-                  </p>
-                </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_domain">Dominio:</label>
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+              http://www.
+            </span>
+            <input class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="example.com" type="text" name="restaurant[domain]" id="restaurant_domain">
+          </div>
+        </div>
 
-                <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Username
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <div class="max-w-lg flex rounded-md shadow-sm">
-                        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                          workcation.com/
-                        </span>
-                        <input type="text" name="username" id="username" autocomplete="username" class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      About
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <textarea id="about" name="about" rows="3" class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"></textarea>
-                      <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="photo" class="block text-sm font-medium text-gray-700">
-                      Photo
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <div class="flex items-center">
-                        <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                          <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                        </span>
-                        <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                          Change
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="cover_photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Cover photo
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                        <div class="space-y-1 text-center">
-                          <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>
-                          <div class="flex text-sm text-gray-600">
-                            <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                              <span>Upload a file</span>
-                              <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                            </label>
-                            <p class="pl-1">or drag and drop</p>
-                          </div>
-                          <p class="text-xs text-gray-500">
-                            PNG, JPG, GIF up to 10MB
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-                <div>
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Personal Information
-                  </h3>
-                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Use a permanent address where you can receive mail.
-                  </p>
-                </div>
-                <div class="space-y-6 sm:space-y-5">
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="first_name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      First name
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="first_name" id="first_name" autocomplete="given-name" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="last_name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Last name
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="last_name" id="last_name" autocomplete="family-name" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Email address
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input id="email" name="email" type="email" autocomplete="email" class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="country" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Country / Region
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <select id="country" name="country" autocomplete="country" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="street_address" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Street address
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="street_address" id="street_address" autocomplete="street-address" class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="city" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      City
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="city" id="city" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="state" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      State / Province
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="state" id="state" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="zip" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      ZIP / Postal
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <input type="text" name="zip" id="zip" autocomplete="postal-code" class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-                <div>
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Notifications
-                  </h3>
-                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    We'll always let you know about important changes, but you pick what else you want to hear about.
-                  </p>
-                </div>
-                <div class="space-y-6 sm:space-y-5 divide-y divide-gray-200">
-                  <div class="pt-6 sm:pt-5">
-                    <div role="group" aria-labelledby="label-email">
-                      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                        <div>
-                          <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700" id="label-email">
-                            By Email
-                          </div>
-                        </div>
-                        <div class="mt-4 sm:mt-0 sm:col-span-2">
-                          <div class="max-w-lg space-y-4">
-                            <div class="relative flex items-start">
-                              <div class="flex items-center h-5">
-                                <input id="comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                              </div>
-                              <div class="ml-3 text-sm">
-                                <label for="comments" class="font-medium text-gray-700">Comments</label>
-                                <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                              </div>
-                            </div>
-                            <div>
-                              <div class="relative flex items-start">
-                                <div class="flex items-center h-5">
-                                  <input id="candidates" name="candidates" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                  <label for="candidates" class="font-medium text-gray-700">Candidates</label>
-                                  <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <div class="relative flex items-start">
-                                <div class="flex items-center h-5">
-                                  <input id="offers" name="offers" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                  <label for="offers" class="font-medium text-gray-700">Offers</label>
-                                  <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pt-6 sm:pt-5">
-                    <div role="group" aria-labelledby="label-notifications">
-                      <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                        <div>
-                          <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700" id="label-notifications">
-                            Push Notifications
-                          </div>
-                        </div>
-                        <div class="sm:col-span-2">
-                          <div class="max-w-lg">
-                            <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
-                            <div class="mt-4 space-y-4">
-                              <div class="flex items-center">
-                                <input id="push_everything" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                <label for="push_everything" class="ml-3 block text-sm font-medium text-gray-700">
-                                  Everything
-                                </label>
-                              </div>
-                              <div class="flex items-center">
-                                <input id="push_email" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                <label for="push_email" class="ml-3 block text-sm font-medium text-gray-700">
-                                  Same as email
-                                </label>
-                              </div>
-                              <div class="flex items-center">
-                                <input id="push_nothing" name="push_notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                <label for="push_nothing" class="ml-3 block text-sm font-medium text-gray-700">
-                                  No push notifications
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-5">
-              <div class="flex justify-end">
-                <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  Cancel
-                </button>
-                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
-          <form action="/restaurants" accept-charset="UTF-8" method="post" _lpchecked="1"><input type="hidden" name="authenticity_token" value="uIzs1bWUdViCMIGmyxF_72nQ6jBb9_Q7JthgijCiAeYrwtRLBxIbHX-ZmV9FF0a1npl25CGLOi65N_o8Comq0w">
-            <div class="shadow sm:rounded-md sm:overflow-hidden">
-              <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-3">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_name">Nombre del Restaurante:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[name]" id="restaurant_name" style="">
-                  </div>
-                  <div class="col-span-6 sm:col-span-3">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_phone_number">Teléfono del Restaurante:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[phone_number]" id="restaurant_phone_number">
-                  </div>
-
-                  <div class="col-span-9 sm:col-span-4">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_address">Dirección:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[address]" id="restaurant_address">
-                  </div>
-                  <div class="col-span-3 sm:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_zip_code">Código Postal:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[zip_code]" id="restaurant_zip_code">
-                  </div>
-                  <div class="col-span-6 sm:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_city">Ciudad:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[city]" id="restaurant_city">
-                  </div>
-                  <div class="col-span-6 sm:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_state">Estado:</label>
-                    <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="country" name="restaurant[state]" id="restaurant_state"><option value="">Seleccione opción</option>
-                      <option value="Aguascalientes">Aguascalientes</option>
-                      <option value="Baja California">Baja California</option>
-                      <option value="Baja California Sur">Baja California Sur</option>
-                      <option value="Campeche">Campeche</option>
-                      <option value="Chiapas">Chiapas</option>
-                      <option value="Chihuahua">Chihuahua</option>
-                      <option value="Ciudad de México">Ciudad de México</option>
-                      <option value="Coahuila">Coahuila</option>
-                      <option value="Colima">Colima</option>
-                      <option value="Durango">Durango</option>
-                      <option value="Estado de México">Estado de México</option>
-                      <option value="Guanajuato">Guanajuato</option>
-                      <option value="Guerrero">Guerrero</option>
-                      <option value="Hidalgo">Hidalgo</option>
-                      <option value="Jalisco">Jalisco</option>
-                      <option value="Michoacán">Michoacán</option>
-                      <option value="Morelos">Morelos</option>
-                      <option value="Nayarit">Nayarit</option>
-                      <option value="Nuevo León">Nuevo León</option>
-                      <option value="Oaxaca">Oaxaca</option>
-                      <option value="Puebla">Puebla</option>
-                      <option value="Querétaro">Querétaro</option>
-                      <option value="Quintana Roo">Quintana Roo</option>
-                      <option value="San Luis Potosí">San Luis Potosí</option>
-                      <option value="Sinaloa">Sinaloa</option>
-                      <option value="Sonora">Sonora</option>
-                      <option value="Tabasco">Tabasco</option>
-                      <option value="Tamaulipas">Tamaulipas</option>
-                      <option value="Tlaxcala">Tlaxcala</option>
-                      <option value="Veracruz">Veracruz</option>
-                      <option value="Yucatán">Yucatán</option>
-                      <option value="Zacatecas">Zacatecas</option></select>
-                  </div>
-                  <div class="col-span-6 sm:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_country">País:</label>
-                    <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="country" name="restaurant[country]" id="restaurant_country"><option value="México">Mexico</option></select>
-                  </div>
-                  <div class="col-span-6 sm:col-span-6">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_contact_email">Email de Contacto:</label>
-                    <input class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" autocomplete="given-name" type="text" name="restaurant[contact_email]" id="restaurant_contact_email">
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_domain">Dominio:</label>
-                    <div class="mt-1 flex rounded-md shadow-sm">
-                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                        http://www.
-                      </span>
-                      <input class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="example.com" type="text" name="restaurant[domain]" id="restaurant_domain">
-                    </div>
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3">
-                    <label class="block text-sm font-medium text-gray-700" for="restaurant_subdomain">Subdominio:</label>
-                    <div class="mt-1 flex rounded-md shadow-sm">
-                      <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                        http://www.
-                      </span>
-                      <input class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" placeholder="condesa" type="text" name="restaurant[subdomain]" id="restaurant_subdomain">
-                      <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                        .example.com
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h2 class="text-sm font-medium text-gray-700">
-                    Horario Semanal:
-                  </h2>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="0" name="restaurant[opening_hours_attributes][0][day_of_week]" id="restaurant_opening_hours_attributes_0_day_of_week">
-                      Sunday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][0][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][0][active]" id="restaurant_opening_hours_attributes_0_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_0_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_0_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_0_open_time_4i" name="restaurant[opening_hours_attributes][0][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_0_open_time_5i" name="restaurant[opening_hours_attributes][0][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_0_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_0_close_time_4i" name="restaurant[opening_hours_attributes][0][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_0_close_time_5i" name="restaurant[opening_hours_attributes][0][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="1" name="restaurant[opening_hours_attributes][1][day_of_week]" id="restaurant_opening_hours_attributes_1_day_of_week">
-                      Monday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][1][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][1][active]" id="restaurant_opening_hours_attributes_1_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_1_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_1_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_1_open_time_4i" name="restaurant[opening_hours_attributes][1][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_1_open_time_5i" name="restaurant[opening_hours_attributes][1][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_1_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_1_close_time_4i" name="restaurant[opening_hours_attributes][1][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_1_close_time_5i" name="restaurant[opening_hours_attributes][1][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="2" name="restaurant[opening_hours_attributes][2][day_of_week]" id="restaurant_opening_hours_attributes_2_day_of_week">
-                      Tuesday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][2][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][2][active]" id="restaurant_opening_hours_attributes_2_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_2_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_2_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_2_open_time_4i" name="restaurant[opening_hours_attributes][2][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_2_open_time_5i" name="restaurant[opening_hours_attributes][2][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_2_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_2_close_time_4i" name="restaurant[opening_hours_attributes][2][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_2_close_time_5i" name="restaurant[opening_hours_attributes][2][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="3" name="restaurant[opening_hours_attributes][3][day_of_week]" id="restaurant_opening_hours_attributes_3_day_of_week">
-                      Wednesday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][3][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][3][active]" id="restaurant_opening_hours_attributes_3_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_3_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_3_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_3_open_time_4i" name="restaurant[opening_hours_attributes][3][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_3_open_time_5i" name="restaurant[opening_hours_attributes][3][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_3_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_3_close_time_4i" name="restaurant[opening_hours_attributes][3][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_3_close_time_5i" name="restaurant[opening_hours_attributes][3][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="4" name="restaurant[opening_hours_attributes][4][day_of_week]" id="restaurant_opening_hours_attributes_4_day_of_week">
-                      Thursday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][4][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][4][active]" id="restaurant_opening_hours_attributes_4_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_4_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_4_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_4_open_time_4i" name="restaurant[opening_hours_attributes][4][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_4_open_time_5i" name="restaurant[opening_hours_attributes][4][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_4_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_4_close_time_4i" name="restaurant[opening_hours_attributes][4][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_4_close_time_5i" name="restaurant[opening_hours_attributes][4][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="5" name="restaurant[opening_hours_attributes][5][day_of_week]" id="restaurant_opening_hours_attributes_5_day_of_week">
-                      Friday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][5][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][5][active]" id="restaurant_opening_hours_attributes_5_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_5_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_5_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_5_open_time_4i" name="restaurant[opening_hours_attributes][5][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_5_open_time_5i" name="restaurant[opening_hours_attributes][5][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_5_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_5_close_time_4i" name="restaurant[opening_hours_attributes][5][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_5_close_time_5i" name="restaurant[opening_hours_attributes][5][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
-                    <div class="flex col-span-2 flex-col justify-center pl-3">
-                      <input type="hidden" value="6" name="restaurant[opening_hours_attributes][6][day_of_week]" id="restaurant_opening_hours_attributes_6_day_of_week">
-                      Saturday
-                    </div>
-                    <div class="flex col-span-2 flex-col justify-center items-center">
-                      <input name="restaurant[opening_hours_attributes][6][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][6][active]" id="restaurant_opening_hours_attributes_6_active">
-                      <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_6_active">
-                        <span class="sr-only">Use setting</span>
-                        <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
-                      </label>            </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_6_open_time">Desde:</label>
-                          <select id="restaurant_opening_hours_attributes_6_open_time_4i" name="restaurant[opening_hours_attributes][6][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_6_open_time_5i" name="restaurant[opening_hours_attributes][6][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                      <div class="flex col-span-3 flex-col justify-center items-center">
-                        <div class="flex justify-center items-center">
-                          <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_6_close_time">Hasta:</label>
-                          <select id="restaurant_opening_hours_attributes_6_close_time_4i" name="restaurant[opening_hours_attributes][6][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05" selected="selected">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                          </select>
-                          : <select id="restaurant_opening_hours_attributes_6_close_time_5i" name="restaurant[opening_hours_attributes][6][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                          </select>
-
-                        </div>
-                      </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Logotipo</label>
-                  <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                    <div class="space-y-1 text-center">
-                      <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                      </svg>
-                      <div class="flex text-sm text-gray-600">
-                        <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                          <span>Upload a file</span>
-                          <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                        </label>
-                        <p class="pl-1">or drag and drop</p>
-                      </div>
-                      <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                <a class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="/restaurants">Cancelar</a>
-                <input type="submit" name="commit" value="Guardar" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-disable-with="Guardar">
-              </div>
-            </div>
-          </form>
+        <div class="col-span-6 sm:col-span-3">
+          <label class="block text-sm font-medium text-gray-700" for="restaurant_subdomain">Subdominio:</label>
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+              http://www.
+            </span>
+            <input class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" placeholder="condesa" type="text" name="restaurant[subdomain]" id="restaurant_subdomain">
+            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+              .example.com
+            </span>
+          </div>
         </div>
       </div>
-    </main>
+
+      <div>
+        <h2 class="text-sm font-medium text-gray-700">
+          Horario Semanal:
+        </h2>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="0" name="restaurant[opening_hours_attributes][0][day_of_week]" id="restaurant_opening_hours_attributes_0_day_of_week">
+            Sunday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][0][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][0][active]" id="restaurant_opening_hours_attributes_0_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_0_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_0_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_0_open_time_4i" name="restaurant[opening_hours_attributes][0][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_0_open_time_5i" name="restaurant[opening_hours_attributes][0][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_0_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_0_close_time_4i" name="restaurant[opening_hours_attributes][0][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_0_close_time_5i" name="restaurant[opening_hours_attributes][0][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="1" name="restaurant[opening_hours_attributes][1][day_of_week]" id="restaurant_opening_hours_attributes_1_day_of_week">
+            Monday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][1][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][1][active]" id="restaurant_opening_hours_attributes_1_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_1_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_1_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_1_open_time_4i" name="restaurant[opening_hours_attributes][1][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_1_open_time_5i" name="restaurant[opening_hours_attributes][1][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_1_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_1_close_time_4i" name="restaurant[opening_hours_attributes][1][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_1_close_time_5i" name="restaurant[opening_hours_attributes][1][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="2" name="restaurant[opening_hours_attributes][2][day_of_week]" id="restaurant_opening_hours_attributes_2_day_of_week">
+            Tuesday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][2][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][2][active]" id="restaurant_opening_hours_attributes_2_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_2_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_2_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_2_open_time_4i" name="restaurant[opening_hours_attributes][2][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_2_open_time_5i" name="restaurant[opening_hours_attributes][2][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_2_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_2_close_time_4i" name="restaurant[opening_hours_attributes][2][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_2_close_time_5i" name="restaurant[opening_hours_attributes][2][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="3" name="restaurant[opening_hours_attributes][3][day_of_week]" id="restaurant_opening_hours_attributes_3_day_of_week">
+            Wednesday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][3][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][3][active]" id="restaurant_opening_hours_attributes_3_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_3_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_3_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_3_open_time_4i" name="restaurant[opening_hours_attributes][3][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_3_open_time_5i" name="restaurant[opening_hours_attributes][3][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_3_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_3_close_time_4i" name="restaurant[opening_hours_attributes][3][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_3_close_time_5i" name="restaurant[opening_hours_attributes][3][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="4" name="restaurant[opening_hours_attributes][4][day_of_week]" id="restaurant_opening_hours_attributes_4_day_of_week">
+            Thursday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][4][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][4][active]" id="restaurant_opening_hours_attributes_4_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_4_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_4_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_4_open_time_4i" name="restaurant[opening_hours_attributes][4][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_4_open_time_5i" name="restaurant[opening_hours_attributes][4][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_4_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_4_close_time_4i" name="restaurant[opening_hours_attributes][4][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_4_close_time_5i" name="restaurant[opening_hours_attributes][4][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="5" name="restaurant[opening_hours_attributes][5][day_of_week]" id="restaurant_opening_hours_attributes_5_day_of_week">
+            Friday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][5][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][5][active]" id="restaurant_opening_hours_attributes_5_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_5_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_5_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_5_open_time_4i" name="restaurant[opening_hours_attributes][5][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_5_open_time_5i" name="restaurant[opening_hours_attributes][5][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_5_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_5_close_time_4i" name="restaurant[opening_hours_attributes][5][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_5_close_time_5i" name="restaurant[opening_hours_attributes][5][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 bg-gray-100 p-2 my-1 sm:grid-cols-2 md:grid-cols-10 sm:rounded-lg">
+          <div class="flex col-span-2 flex-col justify-center pl-3">
+            <input type="hidden" value="6" name="restaurant[opening_hours_attributes][6][day_of_week]" id="restaurant_opening_hours_attributes_6_day_of_week">
+            Saturday
+          </div>
+          <div class="flex col-span-2 flex-col justify-center items-center">
+            <input name="restaurant[opening_hours_attributes][6][active]" type="hidden" value="0"><input class="absolute inset-0 sr-only" type="checkbox" value="1" name="restaurant[opening_hours_attributes][6][active]" id="restaurant_opening_hours_attributes_6_active">
+            <label class="slider:bg-indigo-600 bg-gray-300 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" for="restaurant_opening_hours_attributes_6_active">
+              <span class="sr-only">Use setting</span>
+              <span aria-hidden="true" class="slider:translate-x-5 translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 pointer-events-none"></span>
+            </label>            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_6_open_time">Desde:</label>
+                <select id="restaurant_opening_hours_attributes_6_open_time_4i" name="restaurant[opening_hours_attributes][6][open_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_6_open_time_5i" name="restaurant[opening_hours_attributes][6][open_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="flex col-span-3 flex-col justify-center items-center">
+              <div class="flex justify-center items-center">
+                <label class="block text-sm font-medium text-gray-700" for="restaurant_opening_hours_attributes_6_close_time">Hasta:</label>
+                <select id="restaurant_opening_hours_attributes_6_close_time_4i" name="restaurant[opening_hours_attributes][6][close_time(4i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05" selected="selected">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>
+                : <select id="restaurant_opening_hours_attributes_6_close_time_5i" name="restaurant[opening_hours_attributes][6][close_time(5i)]" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Logotipo</label>
+        <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+          <div class="space-y-1 text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div class="flex text-sm text-gray-600">
+              <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                <span>Upload a file</span>
+                <input id="file-upload" name="file-upload" type="file" class="sr-only">
+              </label>
+              <p class="pl-1">or drag and drop</p>
+            </div>
+            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+      <a class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="/restaurants">Cancelar</a>
+      <input type="submit" name="commit" value="Guardar" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-disable-with="Guardar">
+    </div>
   </div>
-</div>
+</form>
